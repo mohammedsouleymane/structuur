@@ -10,8 +10,7 @@
 ```scheme
 (define (iter-product factor a next b)
   (define (iter a res)  (if (> a b) res (iter (next a) (* (factor a) res))))
-  (iter a 1)
- )
+  (iter a 1))
 ```
 
 4.7.3 Factorial
@@ -30,8 +29,7 @@
 ```scheme
 (define (accumulate combiner null-value term a next b)
   (define (iter a res)
-    (if (> a b) res (iter (next a) (combiner (term a) res))
-        ))
+    (if (> a b) res (iter (next a) (combiner (term a) res))))
   (iter a null-value))
 ```
 
