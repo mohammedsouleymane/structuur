@@ -1,4 +1,4 @@
-3.1.1 Recursief
+## 3.1.1 Recursief
 ```scheme
 (define (1- x) (- x 1))
 (define (1+ x) (+ 1 x))
@@ -11,7 +11,7 @@
   ))
 ```
 
-3.1.2 Iteratief
+## 3.1.2 Iteratief
 
 ```scheme
 (define (1- x) (- x 1))
@@ -25,7 +25,7 @@
   ))
 ```
 
-3.2 Multiply
+## 3.2 Multiply
 ```scheme
 (define (1- x) (- x 1))
 
@@ -41,7 +41,7 @@
 )
 ```
 
-3.2.1 Fast Multiply
+## 3.2.1 Fast Multiply
 ```scheme
 (define (1- x) (- x 1))
 (define (1+ x) (+ x 1))
@@ -69,7 +69,7 @@
   )
 ```
 
-3.3.1 Het getal e
+## 3.3.1 Het getal e
 ```scheme
 (define (factorial n)
   (if (zero? n)
@@ -88,7 +88,7 @@
   )
 ```
 
-3.5 Mutuele recursie
+## 3.5 Mutuele recursie
 ```scheme
 (define (my-even? n)
 (if (= n 0)
@@ -103,7 +103,7 @@
   ))
 ```
 
-3.6 Diepte van een recursief proces
+## 3.6 Diepte van een recursief proces
 ```scheme
 (define (weird n)
 (cond ((= n 1) 1)
@@ -112,7 +112,7 @@
   )
 ```
 
-3.6.2 Bereken de recursie diepte
+## 3.6.2 Bereken de recursie diepte
 ```scheme
 (define (depth-weird n)
   
@@ -125,7 +125,7 @@
   )
 ```
 
-3.7.2 Binaire vormen
+## 3.7.2 Binaire vormen
 ```scheme
 (define (display-as-binary n)
 
@@ -136,7 +136,7 @@
   )
 ```
 
-3.9.1 display-n
+## 3.9.1 display-n
 ```scheme
 (define (display-n x n)
 
@@ -144,7 +144,7 @@
   )
 ```
 
-3.9.2 parasol
+## 3.9.2 parasol
 ```scheme
 (define (display-n x n)
 
