@@ -1,4 +1,4 @@
-4.7.1 Contructieve recursie
+## 4.7.1 Contructieve recursie
 ```scheme
 (define (product factor a next b)
   (if (> a b)
@@ -6,14 +6,14 @@
       (* (factor a) (product factor (next a) next b))))
 ```
 
-4.7.2 Staartrecursie
+## 4.7.2 Staartrecursie
 ```scheme
 (define (iter-product factor a next b)
   (define (iter a res)  (if (> a b) res (iter (next a) (* (factor a) res))))
   (iter a 1))
 ```
 
-4.7.3 Factorial
+## 4.7.3 Factorial
 ```scheme
 (define (product factor a next b)
   (if (> a b)
@@ -25,7 +25,7 @@
   (product + 1 (lambda (x) (+ x 1)) n ))
 ```
 
-4.9.1 Accumulate
+## 4.9.1 Accumulate
 ```scheme
 (define (accumulate combiner null-value term a next b)
   (define (iter a res)
@@ -33,7 +33,7 @@
   (iter a null-value))
 ```
 
-4.9.2 Product en Sum
+## 4.9.2 Product en Sum
 ```scheme
 (define (product factor a next b)
   (accumulate * 1 factor a next b))
@@ -47,7 +47,7 @@
   (iter a null-value))
 ```
 
-4.9.3 Add en Multiply
+## 4.9.3 Add en Multiply
 ```scheme
 (define (add a b)
   (accumulate + a (lambda (x) 1) 1 (lambda (x) (+ x 1)) b))
@@ -62,7 +62,7 @@
   (iter a null-value))
 ```
 
-4.10.1 Filtered-accumulate
+## 4.10.1 Filtered-accumulate
 ```scheme
 (define (filtered-accumulate combiner filter? null-value term a next b)
   (define (iter a res)
@@ -72,7 +72,7 @@
     (iter a null-value))
 ```
 
-4.10.2 Grootste gemene deler
+## 4.10.2 Grootste gemene deler
 ```scheme
 (define (product-gcd n)
   (define (iter i res)
