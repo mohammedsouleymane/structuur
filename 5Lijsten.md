@@ -1,4 +1,4 @@
-5.6 Element toevoegen achteraan een lijst
+## 5.6 Element toevoegen achteraan een lijst
 ```scheme
 (define (add-to-end n ls)
   (if (null? ls) (cons n '())
@@ -7,7 +7,7 @@
   )
 ```
 
-5.7 Append
+## 5.7 Append
 ```scheme
 (define (my-append li ls)
   (define (iter l n) 
@@ -16,7 +16,7 @@
   (iter (reverse li) ls))
 ```
 
-5.8 Lijsten reversen
+## 5.8 Lijsten reversen
 ```scheme
 (define (rec-reverse l)
   (if (null? l) l
@@ -33,7 +33,7 @@
   (iter l '()))
 ```
 
-5.9 Laatste element van lijst
+## 5.9 Laatste element van lijst
 ```scheme
 (define (last l)
   (cond ((null? l) #f)
@@ -42,7 +42,7 @@
   )
 ```
 
-5.10.1 Change
+## 5.10.1 Change
 ```scheme
 (define (change e1 e2 l)
   (cond ((null? l) '())
@@ -52,14 +52,14 @@
   )
 ```
 
-5.10.2 Change d.m.v. map
+## 5.10.2 Change d.m.v. map
 ```scheme
 
 (define (change-dmv-map e1 e2 l)
   (map (lambda (x) (if (eq? x e1) e2 x)) l))
 ```
 
- 5.11 My-equal?
+## 5.11 My-equal?
  ```scheme
  (define (my-equal? l1 l2)
 
@@ -69,7 +69,7 @@
         (else #f)))
  ```
 
- 5.12.1 Sommatie van elementen in lijsten: Recursieve versie
+## 5.12.1 Sommatie van elementen in lijsten: Recursieve versie
  ```scheme
  (define (rec-sum-lists l1 l2)
   (cond ((and (null? l1) (null? l2) '()))
@@ -78,7 +78,7 @@
         (else (cons (+ (car l1) (car l2)) (rec-sum-lists (cdr l1) (cdr l2))))))
  ```
 
-5.12.2 Sommatie van elementen in lijsten: Iteratieve versie
+## 5.12.2 Sommatie van elementen in lijsten: Iteratieve versie
  ```scheme
  (define (iter-sum-lists l1 l2)
   (define (iter l1 l2 res)
@@ -89,7 +89,7 @@
   (reverse (iter l1 l2 '())))
  ```
 
- 5.15.1 Samenvoegen van twee lijsten
+## 5.15.1 Samenvoegen van twee lijsten
  ```scheme
  (define (rec-merge-n l1 l2 n)
   (define (rec l1 l2 n2)
@@ -118,7 +118,7 @@
   )
  ```
 
-5.15.2 Lijsten samenvoegen: Willekeurig aantal lijsten
+## 5.15.2 Lijsten samenvoegen: Willekeurig aantal lijsten
 ```scheme
 (define (super-merge-n l1 n)
 
