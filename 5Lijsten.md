@@ -132,4 +132,17 @@
  ;  (trace iter)
   (iter (car l1) (cdr l1) 0 '())
   )
+
+; recursive
+(define (super-merge-n l1 n)
+
+  (define (rec l1 s n2)
+    
+    (cond  ((and (null? l1) (null? s) ) '()) ; current && others list null 
+           ((null? l1) (rec (car s) (cdr s) 0)) ; current null -> pass left as current && right as others
+           ((= n2 n) (rec (car s) (append (cdr s) (list l1)) 0)) ;current = first of others && others = rest + rest of prev curr
+           (else (cons (car l1) (rec (cdr l1) s (+ 1 n2)))))) ; add num 
+  ;(trace rec)
+  (rec (car l1) (cdr l1) 0)
+  )
 ```
