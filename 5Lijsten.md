@@ -91,17 +91,16 @@
 
 ## 5.15.1 Samenvoegen van twee lijsten
  ```scheme
- (define (rec-merge-n l1 l2 n)
-  (define (rec l1 l2 n2)
-    (cond ((and (null? l1) (null? l2) ) '())
-          ((null? l1) (rec l2 l1 0))
-          ((= n2 n)  (rec l2 l1 0))
-          (else (cons (car l1) (rec (cdr l1) l2 (+ 1 n2))))
-          )
-    )
-  ;(trace rec)
-  (rec l1 l2 0)
-  )
+(define (rec-merge-n l1 l2 n)
+ (define (rec l1 l2 n2)
+   (cond ((null? l1) l2)
+         ((= n2 n)  (rec l2 l1 0))
+         (else (cons (car l1) (rec (cdr l1) l2 (+ 1 n2))))
+         )
+   )
+ ;(trace rec)
+ (rec l1 l2 0)
+ )
 
 
 (define (iter-merge-n l1 l2 n)
