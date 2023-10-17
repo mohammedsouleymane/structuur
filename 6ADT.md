@@ -24,5 +24,6 @@
 (define start-punt car)
 (define end-punt cdr)
 
-(define (middelpunt s) (make-punt (/ (+ (x (start-punt s)) (x (end-punt s))) 2)  (/ (+ (y (start-punt s)) (y (end-punt s))) 2)))
+(define (middelpunt s)
+  (make-punt (/ (+ (x (start-punt s)) (x (end-punt s))) 2)  (/ (+ (y (start-punt s)) (y (end-punt s))) 2)))
 ```
