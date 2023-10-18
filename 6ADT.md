@@ -15,7 +15,7 @@
 (define end-punt cdr)
 ```
 
-## 6.1.3 MIddelpunt
+## 6.1.3 Middelpunt
 ```scheme
 (define make-punt cons)
 (define x car)
