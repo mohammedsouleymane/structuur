@@ -74,6 +74,17 @@
 
 ## 4.10.2 Grootste gemene deler
 ```scheme
+;hoge orde
+(define (filtered-accumulate combiner filter? null-value term a next b)
+  (define (iter a res)
+    (cond ((> a b) res)
+          ((filter? a) (iter (next a) (combiner (term a) res)))
+          (else (iter (next a) res))))
+    (iter a null-value))
+(define (product-gcd n)
+  (filtered-accumulate * (lambda (x) (= (gcd x n)1)) 1 (lambda (x) x) 1 (lambda (x) (+ 1 x)) n))
+
+;geen hoge orde
 (define (product-gcd n)
   (define (iter i res)
     (cond ((= n i) res)
