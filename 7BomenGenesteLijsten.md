@@ -201,3 +201,52 @@
 (define (apple-types l)
   (distinct (all-apples l)))
 ```
+
+## 7.9.4 Procedure om de boom te bewerken
+```scheme
+(define (atom? x)
+  (not (pair? x)))
+
+(define (bewerk-boom boom doe-blad doe-appel combiner init)
+  (cond ((null? boom) init)
+        ((atom? boom) (if (eq? boom 'blad) (doe-blad boom)))
+        ((eq? (car boom) 'appel) (doe-appel boom))
+        (else (combiner
+               (bewerk-boom (car boom) doe-blad doe-appel combiner init)
+               (bewerk-boom (cdr boom) doe-blad doe-appel combiner init)))))
+```
+
+## 7.9.5 Tel bladeren (hogere orde)
+```scheme
+(define (atom? x)
+  (not (pair? x)))
+
+(define (bewerk-boom boom doe-blad doe-appel combiner init)
+  (cond ((null? boom) init)
+        ((atom? boom) (if (eq? boom 'blad) (doe-blad boom)))
+        ((eq? (car boom) 'appel) (doe-appel boom))
+        (else (combiner
+               (bewerk-boom (car boom) doe-blad doe-appel combiner init)
+               (bewerk-boom (cdr boom) doe-blad doe-appel combiner init)))))
+
+
+(define (leafs-dmv-bewerk boom)
+  (bewerk-boom boom (lambda (x) 1) (lambda (x) 0) + 0))
+```
+
+## 7.9.6 Geef alle appels (hogere orde)
+```scheme
+(define (atom? x)
+  (not (pair? x)))
+
+(define (bewerk-boom boom doe-blad doe-appel combiner init)
+  (cond ((null? boom) init)
+        ((atom? boom) (if (eq? boom 'blad) (doe-blad boom)))
+        ((eq? (car boom) 'appel) (doe-appel boom))
+        (else (combiner
+               (bewerk-boom (car boom) doe-blad doe-appel combiner init)
+               (bewerk-boom (cdr boom) doe-blad doe-appel combiner init)))))
+
+(define (all-apples-dmv-bewerk boom)
+  (bewerk-boom boom (lambda (x) '()) (lambda (x) (cons (cdr x) '())) append '()))
+```
