@@ -93,4 +93,15 @@
   (iter 1  1))
 ```
 
+# Hogere Orde Procedures: procedures als return waarde
 
+## 4.14 Compose
+```scheme
+(define (compose f g) (lambda (x) (f(g x))))
+```
+
+## 4.15.1 Do-n
+```scheme
+(define (do-n f n) 
+    (if (> n 0) (begin (f) (do-n f (- n 1)))))
+```
