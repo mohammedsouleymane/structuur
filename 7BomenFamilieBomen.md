@@ -33,6 +33,7 @@
 
 ## 7.11.3 Collega's
 ```scheme
+;not final
 (define parent  car)
 (define children  cdr)
 
