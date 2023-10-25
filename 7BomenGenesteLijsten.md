@@ -181,25 +181,15 @@
 (define (atom? x)
   (not (pair? x)))
 
-(define (all-apples l)
-  (cond ((or (atom? l)(null? l)) '())
-        ((eq? (car l) 'appel) (cons (cdr l) '()))
-        (else (append (all-apples (car l))  (all-apples (cdr l))))) )
-
- 
-(define (distinct l) ;takes flattend list & removes duplicates
-  (define ll (if(not (null? l)) (distinct (cdr l))))
-  (cond ((null? l) '())
-        ((not (contains (car l) ll)) (cons (car l) ll))
-        (else ll)))
-
-(define (contains e l) ;takes flattend list & checks if e is in list
-  (cond ((null? l) #f)
-        ((equal? (car l) e))
-        (else (contains e (cdr l)))))
+(define (union x l)
+    (cond ((null? x) l)
+          ((member (car x) l) (union (cdr x) l))
+          (else (union (cdr x) (append (list (car x)) l)))))
 
 (define (apple-types l)
-  (distinct (all-apples l)))
+  (cond ((or (atom? l)(null? l)) '())
+        ((eq? (car l) 'appel) (cons (cdr l) '()))
+        (else (union (apple-types (car l))  (apple-types (cdr l))))))
 ```
 
 ## 7.9.4 Procedure om de boom te bewerken
