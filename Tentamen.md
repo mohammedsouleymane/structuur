@@ -70,7 +70,7 @@
            (controleer (cdr lijst)
                        test))))
 ;(a) Wat doet de functie controleer?
-; kijkt of alle elementen in de lijst aan een bepaalt test voldoen
+; controleert of alle elementen in de lijst aan een bepaalde test voldoen
 
 ;(b) Is de functie controleer een hogere orde functie? Waarom wel/niet?
 ; wel: neemt een procedure aan test
