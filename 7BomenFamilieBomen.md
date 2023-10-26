@@ -33,6 +33,35 @@
 
 ## 7.11.3 Collega's
 ```scheme
+;keeping path
+(define (baas boom)
+  (car boom))
+
+(define (onderlingen boom)
+  (cdr boom))
+(define (atom? x)
+  (not (pair? x)))
+
+(define (fringe tree)
+  (cond ((null? tree) '())
+        ((atom? tree) (cons tree '()))
+        (else (append (fringe (car tree)) (fringe (cdr tree))))))
+
+(define (collegas organigram p)
+  (define (boom org pad)
+    (if (eq? (baas org) p)
+        (append pad (fringe (onderlingen org)))
+        (bomen (onderlingen org) (cons (baas org) pad))))
+  
+  (define (bomen orgs pad)
+    (if (null? orgs)
+        #f
+        (or
+        (boom (car orgs) pad)
+        (bomen (cdr orgs) pad))))
+  
+  (boom organigram '()))
+
 ;not final
 (define parent  car)
 (define children  cdr)
