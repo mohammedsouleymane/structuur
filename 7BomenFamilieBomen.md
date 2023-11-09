@@ -106,13 +106,13 @@
 (define children  cdr)
 
 (define (print-vanaf  tree el)
-  (cond ((number? el) (println el (parent tree)) (print-vanaf-in (children tree) (+ 1 el)) tree)
+  (cond ((number? el) (println el (parent tree)) (print-vanaf-in (children tree) (+ 1 el)))
         ((eq? (parent tree) el) (print-vanaf tree 0))
         (else (print-vanaf-in (children tree) el))))
 
 (define (print-vanaf-in  tree el)
   (cond ((null? tree) (display ""))
-        (else (begin (print-vanaf  (car tree) el) (print-vanaf-in (cdr tree) el)))))
+        (else (print-vanaf  (car tree) el) (print-vanaf-in (cdr tree) el))))
 ```
 
 ## 7.13.2 print-tot
@@ -138,7 +138,7 @@
   
   (define (print-tot-in  tree n)
     (cond ((null? tree) (display ""))
-          (else (begin (iter (car tree) (+ 1 n)) (print-tot-in (cdr tree) n)))))
+          (else  (iter (car tree) (+ 1 n)) (print-tot-in (cdr tree) n))))
   
   (iter tree 0))
 ```
