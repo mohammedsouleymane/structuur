@@ -208,15 +208,13 @@
 (define children  cdr)
 
 (define (verdeel tree n)
-  
-  (cond ((null? tree) '())
-        ((null? (children tree)) (list (list (parent tree) n )))
-        (else (verdeel-in (children tree) n))))
+  (if (null? (children tree)) (list (list (parent tree) n ))
+      (verdeel-in (children tree) (/ n (length (children tree))))))
 
 (define (verdeel-in tree n)
-  (define amount (if (null? tree) n (/ n (length tree))))
   (if   (null? tree) '()
-        (append (verdeel (car tree) amount) (verdeel-in (children tree) (- n amount)))))
+        (append (verdeel (car tree) n) (verdeel-in (children tree) n))))
+
 (define familieboom '(jan (piet (frans (tom)
                                        (roel))
                                 (mie))
