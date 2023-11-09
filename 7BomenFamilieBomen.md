@@ -142,6 +142,16 @@
                             (iter (car tree) (+ 1 n))
                             (print-tot-in (cdr tree) n))))
   (iter tree 0))
+
+;with-foreach
+(define (print-tot tree n)
+  (define (iter tree i)
+    (if (<= i n)
+        (begin (println i (parent tree))
+               (for-each
+                (lambda (t) (iter  t (+ 1 i)))
+                (children tree)))))
+  (iter tree 0))
 ```
 
 ## 17.7.1 Verdeel democratisch
