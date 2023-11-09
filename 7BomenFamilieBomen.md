@@ -111,8 +111,9 @@
         (else (print-vanaf-in (children tree) el))))
 
 (define (print-vanaf-in  tree el)
-  (cond ((null? tree) (display ""))
-        (else (print-vanaf  (car tree) el) (print-vanaf-in (cdr tree) el))))
+   (if (not (null? tree))(begin
+                           (print-vanaf  (car tree) el)
+                           (print-vanaf-in (cdr tree) el))))
 ```
 
 ## 7.13.2 print-tot
@@ -137,9 +138,9 @@
                (print-tot-in (children tree) i))))
   
   (define (print-tot-in  tree n)
-    (cond ((null? tree) (display ""))
-          (else  (iter (car tree) (+ 1 n)) (print-tot-in (cdr tree) n))))
-  
+    (if (not(null? tree)) (begin
+                            (iter (car tree) (+ 1 n))
+                            (print-tot-in (cdr tree) n))))
   (iter tree 0))
 ```
 
