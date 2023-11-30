@@ -33,6 +33,35 @@
 
 ## 7.11.3 Collega's
 ```scheme
+;keeping path
+(define (baas boom)
+  (car boom))
+
+(define (onderlingen boom)
+  (cdr boom))
+(define (atom? x)
+  (not (pair? x)))
+
+(define (fringe tree)
+  (cond ((null? tree) '())
+        ((atom? tree) (cons tree '()))
+        (else (append (fringe (car tree)) (fringe (cdr tree))))))
+
+(define (collegas organigram p)
+  (define (boom org pad)
+    (if (eq? (baas org) p)
+        (append pad (fringe (onderlingen org)))
+        (bomen (onderlingen org) (cons (baas org) pad))))
+  
+  (define (bomen orgs pad)
+    (if (null? orgs)
+        #f
+        (or
+        (boom (car orgs) pad)
+        (bomen (cdr orgs) pad))))
+  
+  (boom organigram '()))
+
 ;not final
 (define parent  car)
 (define children  cdr)
@@ -77,13 +106,14 @@
 (define children  cdr)
 
 (define (print-vanaf  tree el)
-  (cond ((number? el) (println el (parent tree)) (print-vanaf-in (children tree) (+ 1 el)) tree)
+  (cond ((number? el) (println el (parent tree)) (print-vanaf-in (children tree) (+ 1 el)))
         ((eq? (parent tree) el) (print-vanaf tree 0))
         (else (print-vanaf-in (children tree) el))))
 
 (define (print-vanaf-in  tree el)
-  (cond ((null? tree) (display ""))
-        (else (begin (print-vanaf  (car tree) el) (print-vanaf-in (cdr tree) el)))))
+   (if (not (null? tree))(begin
+                           (print-vanaf  (car tree) el)
+                           (print-vanaf-in (cdr tree) el))))
 ```
 
 ## 7.13.2 print-tot
@@ -108,9 +138,19 @@
                (print-tot-in (children tree) i))))
   
   (define (print-tot-in  tree n)
-    (cond ((null? tree) (display ""))
-          (else (begin (iter (car tree) (+ 1 n)) (print-tot-in (cdr tree) n)))))
-  
+    (if (not(null? tree)) (begin
+                            (iter (car tree) (+ 1 n))
+                            (print-tot-in (cdr tree) n))))
+  (iter tree 0))
+
+;with-foreach
+(define (print-tot tree n)
+  (define (iter tree i)
+    (if (<= i n)
+        (begin (println i (parent tree))
+               (for-each
+                (lambda (t) (iter  t (+ 1 i)))
+                (children tree)))))
   (iter tree 0))
 ```
 
@@ -168,15 +208,13 @@
 (define children  cdr)
 
 (define (verdeel tree n)
-  
-  (cond ((null? tree) '())
-        ((null? (children tree)) (list (list (parent tree) n )))
-        (else (verdeel-in (children tree) n))))
+  (if (null? (children tree)) (list (list (parent tree) n ))
+      (verdeel-in (children tree) (/ n (length (children tree))))))
 
 (define (verdeel-in tree n)
-  (define amount (if (null? tree) n (/ n (length tree))))
   (if   (null? tree) '()
-        (append (verdeel (car tree) amount) (verdeel-in (children tree) (- n amount)))))
+        (append (verdeel (car tree) n) (verdeel-in (children tree) n))))
+
 (define familieboom '(jan (piet (frans (tom)
                                        (roel))
                                 (mie))
