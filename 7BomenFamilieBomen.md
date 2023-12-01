@@ -61,34 +61,6 @@
         (bomen (cdr orgs) pad))))
   
   (boom organigram '()))
-
-;not final
-(define parent  car)
-(define children  cdr)
-
-(define (add in-list tree)
-  (if in-list (append in-list (list (parent tree))) in-list))
-
-(define (atom? x)
-  (not (pair? x)))
-
-(define (fringe tree)
-  (cond ((null? tree) '())
-        ((atom? tree) (cons tree '()))
-        (else (append (fringe (car tree)) (fringe (cdr tree))))))
-
-(define (collegas el tree)
-
-  (define (ch el tree r a)
-    (cond ((eq? (parent tree) el) (r tree))
-          (else (a (ch-in (children tree) el r a) tree))))
-
-  (define (ch-in tree el r a)
-    (cond ((null? tree) #f)
-          (else (or (ch el (car tree) r a)
-                    (ch-in (cdr tree) el r a)))))
-
-  (append (ch el tree (lambda (x) '()) add) (ch el tree (lambda (x) (fringe (cdr x))) (lambda (x y) x))))
 ```
 
 ## 7.13.1 print-vanaf
