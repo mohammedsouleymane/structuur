@@ -12,12 +12,13 @@
 ## 7.2.2 Diepte van een boom
 ```scheme
 (define (atom? x)
-    (not (pair? x)))
+  (not (pair? x)))
+(define (same-structure? l1 l2)
 
-(define (depth tree)
-  (cond ((or (null? tree) (atom? tree)) 0)
-        (else
-          (max (+ 1 (depth (car tree))) (depth (cdr tree))))))
+  (cond ((null? l1) (null? l2)) 
+        ((null? l2) (null? l1))
+        ((atom? l1) (atom? l2))
+        (else (and (same-structure? (car l1) (car l2)) (same-structure? (cdr l1) (cdr l2))))))
 ```
 
 ## 7.2.3 Diepte en aantal elementen van een boom
