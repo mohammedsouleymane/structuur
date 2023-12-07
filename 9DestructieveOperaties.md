@@ -58,6 +58,15 @@
       (begin
         (schuif-in!  l2 (cdr l1))
         (set-cdr! l1 l2))))
+
+(define (schuif-in-alt! l1 l2)
+  (if (null? (cdr l1))
+      (set-cdr! l1 l2)
+      (let ((next1 (cdr l1))
+            (next2 (cdr l2)))
+        (set-cdr! l1 l2)
+        (set-cdr! l2 next1)
+        (schuif-in-alt! next1 next2)))) 
 ```
 ## 9.17.2 Samenvoegen van klantenbestanden
 ```scheme
