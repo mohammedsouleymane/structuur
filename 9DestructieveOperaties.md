@@ -96,6 +96,22 @@
   
   (for-each (lambda (x) (insert b1 (list x))) b2)
   b1)
+
+(define (merge-2 b1 b2)
+  (define (hulp c1 c2 prev)
+    (cond ((null? c1) (set-cdr! prev c2))
+          ((null? c2) (set-cdr! prev c1))
+          ((best-eq? c1 c2)
+           (set-cdr! prev c1)
+           (hulp (cdr c1) (cdr c2) c1))
+          ((best-< c1 c2)
+           (set-cdr! prev c1)
+           (hulp (cdr c1) c2 c1))
+          (else (set-cdr! prev c2)
+                (hulp c1 (cdr c2) c2))))
+    (let ((dummy (cons 'dummy '())))
+          (hulp b1 b2 dummy)
+          (cdr dummy)) )
 ```
 
 ## 9.14 Examen informatica 1ste zit 1996
