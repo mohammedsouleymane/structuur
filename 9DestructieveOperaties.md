@@ -89,7 +89,7 @@
   (define (insert l el)
   (cond ((null? l) l)
         ((element=? (car el) (car l)) l)
-        ((symbol<? (car (car el))  (car (car l))) 
+        ((symbol<? (caar el)  (caar l)) 
                    (set-cdr! el  l) el)
         ((null? (cdr l)) (set-cdr! l el) l)
         (else (set-cdr! l (insert (cdr l) el)) l)))
