@@ -117,15 +117,20 @@
 ## 9.14 Examen informatica 1ste zit 1996
 ```scheme
 (define (ontdubbel! li)
-  (cons (let loop ((even '())
-                   (l li))
-          (cond ((null? l)  even)
-                ((null? (cdr l) )  even)
-                ((even? (cadr l))
-                 (set! even  (append even (list (cadr l))))
-                 (set-cdr! l (cddr l))
-                 (loop even  l))
-                (else (loop even (cdr l))))) li))
+  (let  ((even '())
+         (oneven '()))
+    (define (hulp lst prev-e prev-o)
+      (cond ((null? lst)
+             (set-cdr! prev-e '())
+             (set-cdr! prev-o '())
+             (cons even oneven))
+            ((even? (car lst))
+             (if (null? prev-e) (set! even lst) (set-cdr! prev-e lst))
+             (hulp (cdr lst) lst prev-o))
+            (else
+             (if (null? prev-o) (set! oneven lst) (set-cdr! prev-o lst))
+             (hulp (cdr lst) prev-e lst))))
+    (hulp li even oneven)))
 ```
 
 ## 9.15 Examen januari 2004: Destructief
