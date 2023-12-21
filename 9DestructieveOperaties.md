@@ -58,6 +58,15 @@
       (begin
         (schuif-in!  l2 (cdr l1))
         (set-cdr! l1 l2))))
+
+(define (schuif-in-alt! l1 l2)
+  (if (null? (cdr l1))
+      (set-cdr! l1 l2)
+      (let ((next1 (cdr l1))
+            (next2 (cdr l2)))
+        (set-cdr! l1 l2)
+        (set-cdr! l2 next1)
+        (schuif-in-alt! next1 next2)))) 
 ```
 ## 9.17.2 Samenvoegen van klantenbestanden
 ```scheme
@@ -80,27 +89,48 @@
   (define (insert l el)
   (cond ((null? l) l)
         ((element=? (car el) (car l)) l)
-        ((symbol<? (car (car el))  (car (car l))) 
+        ((symbol<? (caar el)  (caar l)) 
                    (set-cdr! el  l) el)
         ((null? (cdr l)) (set-cdr! l el) l)
         (else (set-cdr! l (insert (cdr l) el)) l)))
   
   (for-each (lambda (x) (insert b1 (list x))) b2)
   b1)
+
+(define (merge-2 b1 b2)
+  (define (hulp c1 c2 prev)
+    (cond ((null? c1) (set-cdr! prev c2))
+          ((null? c2) (set-cdr! prev c1))
+          ((best-eq? c1 c2)
+           (set-cdr! prev c1)
+           (hulp (cdr c1) (cdr c2) c1))
+          ((best-< c1 c2)
+           (set-cdr! prev c1)
+           (hulp (cdr c1) c2 c1))
+          (else (set-cdr! prev c2)
+                (hulp c1 (cdr c2) c2))))
+    (let ((dummy (cons 'dummy '())))
+          (hulp b1 b2 dummy)
+          (cdr dummy)) )
 ```
 
 ## 9.14 Examen informatica 1ste zit 1996
 ```scheme
 (define (ontdubbel! li)
-  (cons (let loop ((even '())
-                   (l li))
-          (cond ((null? l)  even)
-                ((null? (cdr l) )  even)
-                ((even? (cadr l))
-                 (set! even  (append even (list (cadr l))))
-                 (set-cdr! l (cddr l))
-                 (loop even  l))
-                (else (loop even (cdr l))))) li))
+  (let  ((even '())
+         (oneven '()))
+    (define (hulp lst prev-e prev-o)
+      (cond ((null? lst)
+             (set-cdr! prev-e '())
+             (set-cdr! prev-o '())
+             (cons even oneven))
+            ((even? (car lst))
+             (if (null? prev-e) (set! even lst) (set-cdr! prev-e lst))
+             (hulp (cdr lst) lst prev-o))
+            (else
+             (if (null? prev-o) (set! oneven lst) (set-cdr! prev-o lst))
+             (hulp (cdr lst) prev-e lst))))
+    (hulp li even oneven)))
 ```
 
 ## 9.15 Examen januari 2004: Destructief
