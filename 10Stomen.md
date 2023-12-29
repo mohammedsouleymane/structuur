@@ -136,9 +136,8 @@
         ((empty-stream? s2) s1)
         (else (loop (merge s1 (head s2)) (tail s2))))))
 
- (define (count s)
-   (if (empty-stream? s) 0
-       (+ 1 (count (tail s))))) ;change to accumulate
+(define (count s)
+  (accumulate + 0 (map-stream (lambda (x) 1) s)))
  
  (define (pretpark-traffiek s)
    (map-stream (lambda (x)
