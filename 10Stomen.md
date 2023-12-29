@@ -138,7 +138,7 @@
 
  (define (count s)
    (if (empty-stream? s) 0
-       (+ 1 (count (tail s)))))
+       (+ 1 (count (tail s))))) ;change to accumulate
  
  (define (pretpark-traffiek s)
    (map-stream (lambda (x)
