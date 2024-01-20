@@ -163,6 +163,15 @@
           (else (+ (bud (parent tree) a (+ 1 n)) (budget-in (children tree) a n)))))
   (bud tree a 0))
 
+;alternative
+(define (budget tree ls)
+  (define (iter tree ls)
+    (+ (car ls) (budget-in (children tree) (cdr ls))))
+
+  (define (budget-in tree ls)
+    (cond ((or (null? tree) (null? ls)) 0)
+          (else (+ (iter (parent tree)  ls) (budget-in (children tree) ls)))))
+  (budget-in (children familieboom) ls))
 
 (define familieboom '(jan (piet (frans (tom)
                                        (roel))
