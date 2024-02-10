@@ -20,7 +20,6 @@
 ## 9.4.2 right-rotate
 ```scheme
 (define (right-rotate r)
-  (define n (cons 0  0 ))
   (define (loop f)
     (cond ((null? f) #f)
           ((eq? r (cdr  f))   f)
